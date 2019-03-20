@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 4
 
 const userSchema = new mongoose.Schema({
@@ -9,6 +10,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    required: true,
     minlength: 8
   }
 },{

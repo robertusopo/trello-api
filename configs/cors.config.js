@@ -1,3 +1,4 @@
+const createError = require('http-errors');
 const cors = require('cors');
 
 const allowedOrigins = process.env.CORS_ORIGINS || ["http://localhost:3000"]

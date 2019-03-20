@@ -7,7 +7,7 @@ passport.serializeUser((user, next) => {
   next(null, user.id)
 })
 
-passport.deserializeUser((user, next) => {
+passport.deserializeUser((id, next) => {
   User.findById(id)
     .then(user => next(null, user))
     .catch(next)

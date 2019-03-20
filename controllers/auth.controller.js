@@ -1,11 +1,9 @@
-const Card = require('../models/user.model')
+const User = require('../models/user.model')
+const createError = require('http-errors');
 const passport = require('passport')
 
-const createError = require('http-errors');
-
 module.exports.register = (req, res, next) => {
-  
-  user.findOne({email: req.body.email})
+  User.findOne({email: req.body.email})
     .then(user => {
       if(user) {
         throw createError(409, 'User already registered')
@@ -17,14 +15,14 @@ module.exports.register = (req, res, next) => {
     .catch(next)
 }
 
-module.exports = (req, res, next) => {
+module.exports.authenticate = (req, res, next) => {
   passport.authenticate('local-auth', (error, user, message) => {
     if(error) {
       next(error)
     } else if (!user) {
       throw createError(409, message)
     } else {
-      req.login(user, error => {
+      req.login(user, (error) => {
         if (error) {
           next(error)
         } else {
